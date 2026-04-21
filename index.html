@@ -1,1 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STATE UMAP Explorer</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <h1>STATE UMAP Explorer</h1>
+        <p>Interactive comparison of real and predicted perturbed cell states.</p>
+      </header>
 
+      <section class="card story">
+        <h2>Story Mode</h2>
+        <p>
+          Each point is a cell in UMAP space. Blue points are real perturbed cells, red are baseline-model
+          predictions, and green are our model predictions.
+        </p>
+        <p>
+          If green points overlap or move closer to blue points more than red points do, it indicates our model
+          better captures the true perturbed distribution.
+        </p>
+      </section>
+
+      <section class="card controls">
+        <h2>Controls</h2>
+        <div class="control-grid">
+          <label>
+            <span>Perturbation</span>
+            <select id="perturbationSelect"></select>
+          </label>
+
+          <label>
+            <span>Cell type</span>
+            <select id="cellTypeSelect"></select>
+          </label>
+
+          <label>
+            <span>Search perturbation</span>
+            <input id="searchInput" type="text" placeholder="Type perturbation name..." />
+          </label>
+
+          <label>
+            <span>View mode</span>
+            <select id="viewModeSelect">
+              <option value="all">All filtered points</option>
+              <option value="focus">Focus selected perturbation</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="toggles">
+          <label><input type="checkbox" id="toggleReal" checked /> Real (blue)</label>
+          <label><input type="checkbox" id="toggleBaseline" checked /> Baseline predicted (red)</label>
+          <label><input type="checkbox" id="toggleOurs" checked /> Our model predicted (green)</label>
+          <label><input type="checkbox" id="toggleCentroidArrows" /> Show centroid arrows in focus mode</label>
+        </div>
+      </section>
+
+      <section class="card plot-section">
+        <h2>UMAP Visualization</h2>
+        <div id="status" class="status">Loading data...</div>
+        <div id="plot"></div>
+      </section>
+    </main>
+  </body>
+</html>
